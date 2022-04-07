@@ -23,7 +23,7 @@ const updateProduct = async (e) => {
     data.append(`stock`, stock);
     data.append(`image`, image);
 
-   await axios.put(`http://localhost:5000/api/v3/product/${id}`, data)
+   await axios.put(`/api/v3/product/${id}`, data)
   .then(() => {
     history.push(`/`)
   })
