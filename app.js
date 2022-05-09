@@ -1,3 +1,6 @@
+require(`dotenv`).config();
+require(`./database/mongoose`);
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -5,6 +8,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require(`cors`);
 const productRouteV3 = require(`./app/product_v3/routes`);
+const productRoute = require('./app/product/router');
+const categoryRoute = require('./app/category/router');
 require(`dotenv`).config();
 
 var app = express();
@@ -22,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/public", express.static(path.join(__dirname, "uploads")));
 
 app.use(`/api/v3`, productRouteV3);
+app.use(`/api`, productRoute);
+app.use(`/api`, categoryRoute);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'));
